@@ -57,6 +57,7 @@
 #ifndef QT_NO_OPENGL
 #include "mainwidget.h"
 #include "calendar.h"
+#include "quadtree.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -67,35 +68,27 @@ int main(int argc, char *argv[])
     format.setDepthBufferSize(24);
     QSurfaceFormat::setDefaultFormat(format);
 
-    app.setApplicationName("cube");
+    app.setApplicationName("tp3");
     app.setApplicationVersion("0.1");
 
 #ifndef QT_NO_OPENGL
-    MainWidget widget1(0);
+    /*MainWidget widget1(0);
     widget1.show();
-
-    /*MainWidget widget2(1);
-    widget2.show();
-
-    MainWidget widget3(2);
-    widget3.show();
-
-    MainWidget widget4(3);
-    widget4.show();
 
     Calendar cal;
 
     QObject::connect(&cal, SIGNAL(seasonChanged()),
-                         &widget1, SLOT(changeSeason()));
-    QObject::connect(&cal, SIGNAL(seasonChanged()),
-                         &widget2, SLOT(changeSeason()));
-    QObject::connect(&cal, SIGNAL(seasonChanged()),
-                         &widget3, SLOT(changeSeason()));
-    QObject::connect(&cal, SIGNAL(seasonChanged()),
-                         &widget4, SLOT(changeSeason()));*/
+                         &widget1, SLOT(changeSeason()));*/
 
+    Quadtree quad(0, 0, 64, 64);
+    quad.printInfo();
+    quad.subdivide();
 
-
+    Quadtree *quads = quad.getChildren();
+    for(int i = 0; i < 4; ++i){
+        Quadtree q = quads[i];
+        q.printInfo();
+    }
 
 #else
     QLabel note("OpenGL Support required");

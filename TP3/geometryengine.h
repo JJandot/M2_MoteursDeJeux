@@ -65,7 +65,7 @@ class GeometryEngine : protected QOpenGLFunctions
 public:
     GeometryEngine();
     virtual ~GeometryEngine();
-
+    void initPlaneGeometry(int saison);
     void drawPlaneGeometry(QOpenGLShaderProgram *program);
 
 private:

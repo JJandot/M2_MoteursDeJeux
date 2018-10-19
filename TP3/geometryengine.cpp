@@ -72,7 +72,7 @@ GeometryEngine::GeometryEngine()
 
     // Initializes cube geometry and transfers it to VBOs
     //initCubeGeometry();
-    initPlaneGeometry();
+    initPlaneGeometry(0);
 }
 
 GeometryEngine::~GeometryEngine()
@@ -82,7 +82,7 @@ GeometryEngine::~GeometryEngine()
 }
 //! [0]
 
-void GeometryEngine::initPlaneGeometry(){
+void GeometryEngine::initPlaneGeometry(int saison){
     GLushort index = 0;
     std::vector<float> grayLevel;
 
@@ -104,14 +104,32 @@ void GeometryEngine::initPlaneGeometry(){
         }
     }
 
-
     double incr = 2.0 / nbVertices;
     int grayCpt = 0;
     for(int j = 0; j < nbVertices; ++j){
         for(int i = 0; i < nbVertices; ++i){
             vertices[index].position = QVector3D(i * incr, j * incr, grayLevel[grayCpt]);
             vertices[index].texCoord = QVector2D(i * (1.0 / (nbVertices-1)), j * (1.0 / (nbVertices-1)));
-            vertices[index++].color = QVector3D(grayLevel[grayCpt++], 0, 0);
+
+            QVector3D color;
+            switch (saison) {
+            case 0:
+                color = QVector3D(grayLevel[grayCpt++], 0, 0);
+                break;
+            case 1:
+                color = QVector3D(0, grayLevel[grayCpt++], 0);
+                break;
+            case 2:
+                color = QVector3D(0, 0, grayLevel[grayCpt++]);
+                break;
+            case 3:
+                color = QVector3D(0.5 * grayLevel[grayCpt], 0.5 * grayLevel[grayCpt], 0.5 * grayLevel[grayCpt++]);
+                break;
+            default:
+                break;
+            }
+
+            vertices[index++].color = color;
         }
     }
 

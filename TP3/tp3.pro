@@ -8,12 +8,14 @@ SOURCES += main.cpp
 SOURCES += \
     mainwidget.cpp \
     geometryengine.cpp \
-    calendar.cpp
+    calendar.cpp \
+    quadtree.cpp
 
 HEADERS += \
     mainwidget.h \
     geometryengine.h \
-    calendar.h
+    calendar.h \
+    quadtree.h
 
 RESOURCES += \
     shaders.qrc \

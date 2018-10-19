@@ -53,7 +53,8 @@ OBJECTS_DIR   = ./
 SOURCES       = ../TP3/main.cpp \
 		../TP3/mainwidget.cpp \
 		../TP3/geometryengine.cpp \
-		../TP3/calendar.cpp qrc_shaders.cpp \
+		../TP3/calendar.cpp \
+		../TP3/quadtree.cpp qrc_shaders.cpp \
 		qrc_textures.cpp \
 		moc_mainwidget.cpp \
 		moc_calendar.cpp
@@ -61,6 +62,7 @@ OBJECTS       = main.o \
 		mainwidget.o \
 		geometryengine.o \
 		calendar.o \
+		quadtree.o \
 		qrc_shaders.o \
 		qrc_textures.o \
 		moc_mainwidget.o \
@@ -141,10 +143,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../TP3/tp3.pro ../TP3/mainwidget.h \
 		../TP3/geometryengine.h \
-		../TP3/calendar.h ../TP3/main.cpp \
+		../TP3/calendar.h \
+		../TP3/quadtree.h ../TP3/main.cpp \
 		../TP3/mainwidget.cpp \
 		../TP3/geometryengine.cpp \
-		../TP3/calendar.cpp
+		../TP3/calendar.cpp \
+		../TP3/quadtree.cpp
 QMAKE_TARGET  = TP3
 DESTDIR       = 
 TARGET        = TP3
@@ -333,8 +337,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../TP3/shaders.qrc ../TP3/textures.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TP3/mainwidget.h ../TP3/geometryengine.h ../TP3/calendar.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TP3/main.cpp ../TP3/mainwidget.cpp ../TP3/geometryengine.cpp ../TP3/calendar.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../TP3/mainwidget.h ../TP3/geometryengine.h ../TP3/calendar.h ../TP3/quadtree.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../TP3/main.cpp ../TP3/mainwidget.cpp ../TP3/geometryengine.cpp ../TP3/calendar.cpp ../TP3/quadtree.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -421,6 +425,9 @@ geometryengine.o: ../TP3/geometryengine.cpp ../TP3/geometryengine.h
 
 calendar.o: ../TP3/calendar.cpp ../TP3/calendar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o calendar.o ../TP3/calendar.cpp
+
+quadtree.o: ../TP3/quadtree.cpp ../TP3/quadtree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o quadtree.o ../TP3/quadtree.cpp
 
 qrc_shaders.o: qrc_shaders.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_shaders.o qrc_shaders.cpp

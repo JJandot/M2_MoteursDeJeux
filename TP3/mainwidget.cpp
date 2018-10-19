@@ -90,21 +90,25 @@ void MainWidget::changeSeason()
     switch (saisonIndex) {
     case 0:
         std::cout << " : Printemps" << std::endl;
-        geometries->initPlaneGeometry();
+        geometries->initPlaneGeometry(saisonIndex);
         break;
     case 1:
         std::cout << " : Ete" << std::endl;
+        geometries->initPlaneGeometry(saisonIndex);
         break;
     case 2:
         std::cout << " : Automne" << std::endl;
+        geometries->initPlaneGeometry(saisonIndex);
         break;
     case 3:
         std::cout << " : Hiver" << std::endl;
+        geometries->initPlaneGeometry(saisonIndex);
         break;
     default:
         break;
     }
     saisonIndex = (saisonIndex + 1) % 4;
+    update();
 
 }
 
@@ -168,6 +172,8 @@ void MainWidget::initializeGL()
 
     // Enable back face culling
     glEnable(GL_CULL_FACE);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 //! [2]
 
     geometries = new GeometryEngine;
